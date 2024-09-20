@@ -1,4 +1,4 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=9932CC&height=200&section=header&text=Jogo%20Tetris&fontSize=65&fontAlignY=38&desc=Projeto+de+Sistemas+Digitais&descAlignY=51&descAlign=62"/>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=9932CC&height=200&section=header&text=Jogo%20Tetris&fontSize=65&fontAlignY=38&desc=Projeto+de+Sistemas+Digitais&descAlignY=51&descAlign=62"/>
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=9932CC&size=35&center=true&vCenter=true&width=1000&lines=Projeto+de+Sistemas+Digitais;Desenvolvimento+em+plataforma+de+hardware)](https:git.io/typing-svg)
 
@@ -77,4 +77,4 @@ Este projeto foi desenvolvido na disciplina TEC499 - MI de Sistemas Digitais (Se
 
 ---
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=9932CC&height=120&section=footer"/>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=9932CC&height=175&section=footer"/>
