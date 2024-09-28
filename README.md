@@ -12,9 +12,7 @@ O projeto apresenta desafios como a necessidade de não utilizar bibliotecas esp
 
 ---
 
-<p align="center">
-  <img src="https://i.gifer.com/1DDX.gif" alt="Tetris GIF">
-</p>
+![Pause](gif_testes/jogo.gif)
 
 ---
 
@@ -37,7 +35,28 @@ Ao final deste projeto, o/a discente será capaz de:
 4. **O jogo deve pontuar e eliminar agrupamentos.**
 
 ---
-## **Software Utilizados**
+## **Sumário**
+
+<div id="sumario">
+        <ul>
+        <li><a href="#sft_ut"> Softwares Utilizados </a></li>
+        <li><a href="#kit_placa"> Kit de Desenvolvimento DE1-SoC</a></li>
+        <li><a href="#acl345"> Acelerômetro ADXL345</a></li>
+        <li><a href="#gamerules"> Funcionamento do jogo</a></li>
+        <li><a href="#test"> Testes</a></li>
+        <li><a href="#makefile"> Como executar o Jogo</a></li>
+        <li><a href="#resultado"> Resultados alcançados</a></li>
+        <li><a href="#conclusion"> Conclusão</a></li>
+        <li><a href="#aln"> Alunos</a></li>
+        <li><a href="#crd"> Créditos</a></li>
+        </ul>
+</div>
+
+---
+
+<div id="sft_ut"></div>
+
+## **Softwares Utilizados**
 
 <code><img width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" title = "LINUX"/></code>
 <code><img width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ubuntu/ubuntu-original.svg" title = "UBUNTU"/></code>
@@ -54,6 +73,7 @@ O Visual Studio Code (VS Code) é uma ferramenta popular e altamente funcional u
 A linguagem C é amplamente utilizada em projetos devido à sua eficiência e versatilidade. Com sua sintaxe direta e controle próximo sobre o hardware, o C permite desenvolver programas robustos e rápidos, especialmente em sistemas embarcados, drivers de dispositivos e software de baixo nível. No contexto deste projeto, a utilização da linguagem C foi um dos requisitos necessarios a serem cumpridos.
 
 ---
+<div id="kit_placa"></div>
 
 ## **Kit de Desenvolvimento DE1-SoC**
 
@@ -62,6 +82,27 @@ O kit de desenvolvimento DE1-SoC é uma plataforma de prototipagem projetada par
 ![alt text](image.png)
 
 ---
+<div id="acl345"></div>
+
+## **Acelerômetro ADXL345**
+O ADXL345 é um acelerômetro de baixa potência e alta precisão, capaz de medir acelerações em três eixos (X, Y, Z). Ele é comumente utilizado em aplicações como medição de inclinação, detecção de movimento, controle de gestos, além de monitoramento de atividades em dispositivos portáteis. Seu uso se destaca pela facilidade de comunicação via interfaces I2C ou SPI e pela capacidade de operar em diferentes faixas de aceleração, como ±2g, ±4g, ±8g e ±16g.
+
+### Uso do ADXL345 no projeto
+No projeto, o ADXL345 foi utilizado para capturar as acelerações no eixo X, que são convertidas em movimento dentro do jogo Tetris. Dependendo da aceleração lida no eixo X, a peça se move para a esquerda ou para a direita no tabuleiro, proporcionando uma forma de controle por meio de inclinação.
+
+Etapas do uso:
+1. **Configuração Inicial:** Antes de realizar a leitura dos dados, o acelerômetro foi configurado para operar com uma faixa de medição de ±2g, suficiente para capturar os movimentos suaves de inclinação que desejávamos monitorar. Para isso, utilizamos a interface I2C para enviar os comandos de configuração e ativação. Isso foi feito nas seguintes etapas:
+
+    Configuração dos registradores de controle do ADXL345, como o registrador de formato de dados (DATA_FORMAT) e o registrador de controle de energia (POWER_CTL).<br>
+    Definição da taxa de amostragem: Configuramos o ADXL345 para operar a uma taxa de 100 Hz, o que foi ajustado no registrador BW_RATE.
+2. **Leitura dos Dados:** A leitura da aceleração no eixo X é feita em dois bytes: o primeiro (DATAX0) contém os 8 bits menos significativos, e o segundo (DATAX1) contém os 8 bits mais significativos. Os dois bytes são combinados para formar um valor de 16 bits que representa a aceleração no eixo X. O código responsável por essa leitura está na função ler_aceleracao_x().
+3. **Calibração:** Para garantir que o sensor estivesse devidamente ajustado, realizamos uma calibração inicial, durante a qual o sensor foi mantido em repouso. Foram feitas várias leituras da aceleração e, a partir dessas leituras, foi calculado um offset que foi subtraído das leituras subsequentes para compensar qualquer desvio do eixo X.
+4. **Conversão para Gravidade (G):** A aceleração bruta lida pelo ADXL345 foi convertida para a unidade de gravidade (g) usando a relação entre o valor bruto e a resolução configurada. Para a faixa de ±2g, a conversão foi feita dividindo o valor bruto por 256, obtendo assim a aceleração em "g". O fator de conversão foi ajustado com base na resolução de 4 mg/LSB (miligrama por unidade de valor bruto).
+5. **Movimento no Jogo:** Com base nos valores lidos do acelerômetro, a lógica do jogo foi adaptada para interpretar os valores de aceleração no eixo X. Valores positivos ou negativos acima de um certo limiar indicam movimento para a direita ou para a esquerda, respectivamente. Valores abaixo desse limiar são interpretados como ausência de movimento. Isso foi implementado na função get_direcao_movimento().
+
+---
+<div id="gamerules"></div>
+
 ## **Funcionamento do Jogo**
 
 1. Estrutura Básica do Jogo:<br>
@@ -100,6 +141,8 @@ As peças são geradas dinamicamente através da função CopyShape, que faz uma
 Ao rotacionar ou descartar uma peça, a memória alocada é liberada usando a função DeleteShape para evitar vazamento de memória.
 
 ---
+<div id="test"></div>
+
 ## **Testes** 
 Alguns gif's abaixo descreve os testes feito durante o desenvolvimento.
 
@@ -112,6 +155,12 @@ Alguns gif's abaixo descreve os testes feito durante o desenvolvimento.
 ### Pause
 ![Pause](gif_testes/pause.gif)
 ---
+### Rotação
+![Rotação](gif_testes/rotacao.gif)
+---
+
+
+<div id="makefile"></div> 
 
 ## **Como executar o Jogo**
 
@@ -127,7 +176,7 @@ Este é o alvo padrão do Makefile. Quando você executa make sem especificar um
 Este comando é utilizado para limpar a tela do terminal antes de compilar e executar o programa. Isso ajuda a manter a saída do terminal organizada e facilita a visualização dos resultados.
 
 3. gcc -w -Wall tetris.c -o tetris -lintelfpgaup -lpthread -std=c99
-Este comando utiliza o GCC (GNU Compiler Collection) para compilar o código-fonte do jogo Tetris. Vamos quebrar as opções:<br>
+Este comando utiliza o GCC (GNU Compiler Collection) para compilar o código-fonte do jogo Tetris. Quebrando as opções:<br>
 
     • -w: Desativa todos os avisos durante a compilação.<br>
 • -Wall: Ativa todos os avisos recomendados, ajudando a identificar possíveis problemas no código.<br>
@@ -150,16 +199,21 @@ Ao implementar o makifile, facilitou-se ativamente na execução do jogo. Segue 
 Desse modo, o projeto vai iniciar a execução.
 
 ---
+<div id="resultado"></div> 
+
 ## **Resultados Alcançados**
 Apos a implementação do projeto, todos os resultados estabelecidos foram alcançados com sucesso, gerando aprendizagem e sastifação para os desenvolvedores. <br>
 Alem disso, é possível, enquanto execução, pausar o jogo e posteriormente, após o comando, continar, e também, o usuário pode ratacionar a peça utilizando o butão 0b001 (KEY 01) da placa, gerando mais entretenimento e sastifação aos jogadores.
 
 ---
+<div id="conclusion"></div> 
+
 ## **Conclusão**
 Em suma, o projeto foi executado com sucesso. Apesar dos desafios iniciais relacionados à integração do acelerômetro, o jogo demonstrou ser funcional e atendeu aos requisitos estabelecidos. Além disso, essa experiência foi crucial para aprofundar o entendimento sobre o kit de desenvolvimento, GNU/Linux embarcado e a interação entre hardware e software. Esse conhecimento adquirido certamente enriquecerá futuros projetos a serem desenvolvidos no kit DE1-SoC.
 
 
 ---
+<div id="aln"></div>
 
 ## **Alunos(as)**
 
@@ -188,6 +242,7 @@ Em suma, o projeto foi executado com sucesso. Apesar dos desafios iniciais relac
 </table>
 
 ---
+<div id="crd"></div>
 
 ### **Créditos**
 Este projeto foi desenvolvido na disciplina TEC499 - MI de Sistemas Digitais (Semestre 2024.2) do curso de Engenharia de Computação da Universidade Estadual de Feira de Santana - UEFS.
