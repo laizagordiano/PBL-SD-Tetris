@@ -203,7 +203,7 @@ Desse modo, o projeto vai iniciar a execução.
 
 ## **Resultados Alcançados**
 Apos a implementação do projeto, todos os resultados estabelecidos foram alcançados com sucesso, gerando aprendizagem e sastifação para os desenvolvedores. <br>
-Alem disso, é possível, enquanto execução, pausar o jogo e posteriormente, após o comando, continar, e também, o usuário pode ratacionar a peça utilizando o butão 0b001 (KEY 01) da placa, gerando mais entretenimento e sastifação aos jogadores.
+Alem disso, é possível, enquanto execução, pausar o jogo e posteriormente, após o comando, continar, e também, o usuário pode ratacionar a peça utilizando o botão 0b001 (KEY 01) da placa, gerando mais entretenimento e sastifação aos jogadores.
 
 ---
 <div id="conclusion"></div> 
